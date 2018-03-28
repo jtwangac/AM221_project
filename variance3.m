@@ -1,4 +1,6 @@
 syms a b c d e f g h;
+
+% Data points
 y000 = a;
 y001 = b;
 y010 = c;
@@ -8,6 +10,8 @@ y101 = f;
 y110 = g;
 y111 = h;
 
+
+%average variance given different feature set to partition data
 v_012 = 0;
 v_01 = (a^2+b^2) - 2*((a+b)/2)^2 + (c^2+d^2) - 2*((c+d)/2)^2 + (e^2+f^2) - 2*((e+f)/2)^2 +(g^2+h^2) - 2*((g+h)/2)^2;
 v_02 = (a^2+c^2) - 2*((a+c)/2)^2 + (b^2+d^2) - 2*((b+d)/2)^2 + (e^2+g^2) - 2*((e+g)/2)^2 +(f^2+h^2) - 2*((f+h)/2)^2;
@@ -19,6 +23,7 @@ v_2 = (a^2+c^2+e^2+g^2) - 4 * ((a+c+e+g)/4)^2 + (b^2+d^2+f^2+h^2) - 4 * ((b+d+f+
 
 %u_01 = eval(subs(v_01, {a,b,c,d,e,f,g,h}, {1,2,3,4,5,6,7,8}))
 
+%difference (i.e., return) in variance by adding a feature X0
 d_0_empty = simplify(v_0 - v_empty);
 d_01_1 = simplify(v_01 - v_1);
 d_01_1_simplified = -((a+b-e-f)^2+(c+d-g-h)^2)/4;
@@ -29,6 +34,8 @@ d_012_12_simplified = -((a-e)^2+(b-f)^2+(c-g)^2+(d-h)^2)/2;
 simplify(d_01_1 - d_01_1_simplified)
 simplify(d_02_2 - d_02_2_simplified)
 simplify(d_012_12-d_012_12_simplified)
+
+%difference in returns of adding feature X0 to different feature set
 c_0_empty_1 = simplify(d_0_empty - d_01_1_simplified)
 c_0_empty_2 = simplify(d_0_empty - d_01_1_simplified)
 c_0_empty_12 = simplify(d_0_empty - d_012_12_simplified)
